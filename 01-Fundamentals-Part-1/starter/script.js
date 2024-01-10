@@ -1,4 +1,4 @@
-let js = 'amazing';
+/*let js = 'amazing';
 console.log(40 + 8 + 23 - 10);
 
 console.log('Jonas');
@@ -97,6 +97,71 @@ console.log(x, y);
 
 const averageAge = (ageJonas + ageSarah) / 2;
 console.log(ageJonas, ageSarah, averageAge);
+*/
+
+// ASSIGNMENTS
+const country = 'Brasil';
+const continent = 'South America';
+let population = 214;
+
+console.log(country + ', ' + continent + ', ' + population);
+
+const isIsland = false;
+let language;
+
+console.log(typeof isIsland);
+console.log(typeof population);
+console.log(typeof country);
+console.log(typeof language);
+
+language = 'Portuguese';
+console.log(typeof language);
+
+const splitInHalf = population / 2;
+console.log(splitInHalf);
+population++;
+console.log(population);
+
+const finlandPopulation = 6;
+if (population > finlandPopulation) {
+    console.log('My country has more people than Finland');
+} else {
+    console.log('My country have less people than Finland');
+}
+
+const averagePopulation = 33;
+if (averagePopulation > population) {
+    console.log('My country has less people than the average country');
+} else {
+    console.log('My country has more people than the average country');
+}
+
+const description = country + ' is in ' + continent + ', and its ' + population + ' million people speak ' + language;
+console.log(description)
+
+// CHALLENGES
+const marksMass = 0;
+const marksHeight = 0;
+const johnsMass = 0;
+const johnsHeight = 0;
+
+function calculate(marksMass, marksHeight, johnsMass, johnsHeight) {
+    const marksBMI = marksMass / marksHeight ** 2;
+    const johnsBMI = johnsMass / (johnsHeight * johnsHeight);
+    console.log('Marks BMI: ' + marksBMI);
+    console.log('Johns BMI: ' + johnsBMI);
+
+    const markHigherBMI = marksBMI > johnsBMI;
+
+    if (marksBMI > johnsBMI) {
+        console.log(markHigherBMI);
+    } else {
+        console.log(markHigherBMI);
+    }
+}
+
+calculate(78, 1.69, 92, 1.95);
+calculate(95, 1.88, 85, 1.76);
 
 
 

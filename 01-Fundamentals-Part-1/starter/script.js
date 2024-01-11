@@ -97,9 +97,49 @@ console.log(x, y);
 
 const averageAge = (ageJonas + ageSarah) / 2;
 console.log(ageJonas, ageSarah, averageAge);
+
+const firstName = 'Jonas';
+const job = 'teacher';
+const birthYear = 1991;
+const year = 2037;
+
+const jonas = "I'm " + firstName + ', a ' + (year - birthYear) + ' years old ' + job + '!';
+console.log(jonas);
+
+const jonasNew = `I'm ${firstName}, a ${year - birthYear} years old ${job}!`;
+console.log(jonasNew);
+
+console.log(`Just a regular string...`);
+
+console.log('String with \n\
+multiple \n\
+lines');
+
+console.log(`String with
+multiple
+lines`);
+
+const age = 15;
+
+if (age >= 18) {
+    console.log('Sarah can start driving license 🚗')
+} else {
+    const yearsLeft = 18 - age;
+    console.log(`Sarah is too young. Wait another ${yearsLeft} years 👽`)
+}
+
+const birthYear = 2012;
+let century;
+if (birthYear <= 2000) {
+    century = 20;
+} else {
+    century = 21;
+}
+console.log(century);
 */
 
 // ASSIGNMENTS
+
 const country = 'Brasil';
 const continent = 'South America';
 let population = 214;
@@ -137,7 +177,15 @@ if (averagePopulation > population) {
 }
 
 const description = country + ' is in ' + continent + ', and its ' + population + ' million people speak ' + language;
-console.log(description)
+console.log(description);
+const descriptionNew = `${country} is in ${continent}, and its ${population} million people speak ${language}`;
+console.log(descriptionNew);
+
+if (population > 33) {
+    console.log(`${country}'s population is above average`);
+} else {
+    console.log(`${country}'s population is ${33 - population} million below average`);
+}
 
 // CHALLENGES
 const marksMass = 0;
@@ -148,20 +196,16 @@ const johnsHeight = 0;
 function calculate(marksMass, marksHeight, johnsMass, johnsHeight) {
     const marksBMI = marksMass / marksHeight ** 2;
     const johnsBMI = johnsMass / (johnsHeight * johnsHeight);
-    console.log('Marks BMI: ' + marksBMI);
-    console.log('Johns BMI: ' + johnsBMI);
-
-    const markHigherBMI = marksBMI > johnsBMI;
 
     if (marksBMI > johnsBMI) {
-        console.log(markHigherBMI);
+        console.log(`Mark's BMI (${marksBMI}) is higher than John's (${johnsBMI})!`);
     } else {
-        console.log(markHigherBMI);
+        console.log(`John's BMI (${johnsBMI}) is higher than Mark's (${marksBMI})!`);
     }
 }
 
 calculate(78, 1.69, 92, 1.95);
-calculate(95, 1.88, 85, 1.76);
+calculate(95, 1.88, 85, 1.76);
 
 
 

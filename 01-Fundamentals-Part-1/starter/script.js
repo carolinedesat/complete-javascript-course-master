@@ -234,10 +234,80 @@ if (hasDriversLicense && hasGoodVision && !isTired) {
 } else {
     console.log('Someone else should drive...');
 }
-*/
+
+const day = prompt('Enter the day:');
+
+switch (day) {
+    case 'Monday':
+        console.log('Plan course structure');
+        console.log('Go to coding meetup');
+        break;
+    case 'Tuesday':
+        console.log('Prepare theory videos');
+        break;
+    case 'Wednesday':
+    case 'Thursday':
+        console.log('Write code examples');
+        break;
+    case 'Friday':
+        console.log('Record videos');
+        break;
+    case 'Saturday':
+    case 'Sunday':
+        console.log('Enjoy the weekend');
+        break;
+    default:
+        console.log('Not a valid day')
+}
+
+if (day === 'Monday') {
+    console.log('Plan course structure');
+    console.log('Go to coding meetup');
+} else if (day === 'Tuesday') {
+    console.log('Prepare theory videos');
+} else if (day === 'Wednesday' || day === 'Thursday') {
+    console.log('Write code examples');
+} else if (day == 'Friday') {
+    console.log('Record videos');
+} else if (day === 'Saturday' || day === 'Sunday') {
+    console.log('Enjoy the weekend');
+} else {
+    console.log('Not a valid day')
+}
+
+// Expression and Operator: Piece of code that produces a value
+3 + 4
+1991
+true && false && !false
+
+// Statement: Bigger piece of code that is executed but does not produce a value
+if (23 > 10) {
+    const str = '23 is bigger';
+}
+
+console.log(`I'm ${2037 - 1991} years old.`) // Expression
+
+// Statements are the rigid structure that holds our program together,
+// while expressions fill in the details.
+
+const age = 23;
+age >= 18 ? console.log('I like to drink wine') : console.log('I like to drink water');
+
+const drink = age >= 18 ? 'Wine' : 'Water';
+console.log(drink);
+
+let drink2;
+if (age >= 18) {
+    drink2 = 'Wine';
+} else {
+    drink2 = 'Water';
+}
+console.log(drink2);
+
+console.log(`I like to drink ${age >= 18 ? 'wine' : 'water'}`);
 
 // ASSIGNMENTS
-/*
+
 const country = 'Brasil';
 const continent = 'South America';
 let population = 214;
@@ -312,79 +382,36 @@ if (language === 'English' && population < 50 && !isIsland) {
     console.log(`${country} does not meet your criteria`)
 }
 
-const day = prompt('Enter the day:');
+const language = prompt('Choose a language:');
 
-switch (day) {
-    case 'Monday':
-        console.log('Plan course structure');
-        console.log('Go to coding meetup');
+switch(language) {
+    case 'Chinese':
+    case 'Mandarin':
+        console.log('MOST number os native speakers!');
         break;
-    case 'Tuesday':
-        console.log('Prepare theory videos');
+    case 'Spanish':
+        console.log('2nd place in number of native speakers');
         break;
-    case 'Wednesday':
-    case 'Thursday':
-        console.log('Write code examples');
+    case 'English':
+        console.log('3rd place');
         break;
-    case 'Friday':
-        console.log('Record videos');
+    case 'Hindi':
+        console.log('Number 4');
         break;
-    case 'Saturday':
-    case 'Sunday':
-        console.log('Enjoy the weekend');
+    case 'Arabic':
+        console.log('5th most spoken language');
         break;
     default:
-        console.log('Not a valid day')
+        console.log('Great language too');
 }
 
-if (day === 'Monday') {
-    console.log('Plan course structure');
-    console.log('Go to coding meetup');
-} else if (day === 'Tuesday') {
-    console.log('Prepare theory videos');
-} else if (day === 'Wednesday' || day === 'Thursday') {
-    console.log('Write code examples');
-} else if (day == 'Friday') {
-    console.log('Record videos');
-} else if (day === 'Saturday' || day === 'Sunday') {
-    console.log('Enjoy the weekend');
-} else {
-    console.log('Not a valid day')
-}
+const country = 'Brazil'
+const population = 214;
 
-// Expression and Operator: Piece of code that produces a value
-3 + 4
-1991
-true && false && !false
-
-// Statement: Bigger piece of code that is executed but does not produce a value
-if (23 > 10) {
-    const str = '23 is bigger';
-}
-
-console.log(`I'm ${2037 - 1991} years old.`) // Expression
-
-// Statements are the rigid structure that holds our program together,
-// while expressions fill in the details.
+const average = population > 33 ? console.log(`${country}'s population is above average`) : console.log(`${country}'s population is below average`);
+console.log(`${country}'s population is ${population > 33 ? 'above' : 'below'} average`);
 */
 
-const age = 23;
-age >= 18 ? console.log('I like to drink wine') : console.log('I like to drink water');
-
-const drink = age >= 18 ? 'Wine' : 'Water';
-console.log(drink);
-
-let drink2;
-if (age >= 18) {
-    drink2 = 'Wine';
-} else {
-    drink2 = 'Water';
-}
-console.log(drink2);
-
-console.log(`I like to drink ${age >= 18 ? 'wine' : 'water'}`);
-
-/*
 // CHALLENGES
 const marksMass = 0;
 const marksHeight = 0;
@@ -396,9 +423,9 @@ function calculate(marksMass, marksHeight, johnsMass, johnsHeight) {
     const johnsBMI = johnsMass / (johnsHeight * johnsHeight);
 
     if (marksBMI > johnsBMI) {
-        console.log(`Mark's BMI (${marksBMI}) is higher than John's(${ johnsBMI })!`);
+        console.log(`Mark's BMI (${marksBMI}) is higher than John's (${ johnsBMI })!`);
     } else {
-        console.log(`John's BMI (${johnsBMI}) is higher than Mark's(${ marksBMI })!`);
+        console.log(`John's BMI (${johnsBMI}) is higher than Mark's (${ marksBMI })!`);
     }
 }
 
@@ -418,7 +445,10 @@ if (scoreDolphins > scoreKoalas && scoreDolphins >= 100) {
 } else {
     console.log('No one wins the trophy');
 }
-*/
 
+const bill = 275;
 
+const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+
+console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}`);
 

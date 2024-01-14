@@ -275,20 +275,15 @@ if (day === 'Monday') {
     console.log('Not a valid day')
 }
 
-// Expression and Operator: Piece of code that produces a value
 3 + 4
 1991
 true && false && !false
 
-// Statement: Bigger piece of code that is executed but does not produce a value
 if (23 > 10) {
     const str = '23 is bigger';
 }
 
 console.log(`I'm ${2037 - 1991} years old.`) // Expression
-
-// Statements are the rigid structure that holds our program together,
-// while expressions fill in the details.
 
 const age = 23;
 age >= 18 ? console.log('I like to drink wine') : console.log('I like to drink water');

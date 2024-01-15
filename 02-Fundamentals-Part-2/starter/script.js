@@ -1,6 +1,6 @@
 'use strict';
 
-let hasDriversLicense = false;
+/*let hasDriversLicense = false;
 const passTest = true;
 
 if (passTest) hasDriversLicense = true;
@@ -48,9 +48,56 @@ const age2 = calcAge2(1994);
 
 console.log(age1, age2);
 
+const calcAge3 = birthYear => 2037 - birthYear;
+const age3 = calcAge3(1991);
+console.log(age3);
+
+const yearsUntilRetirement = (birthYear, firstName) => {
+    const age = 2037 - birthYear;
+    const retirement = 65 - age;
+    //return retirement;
+    return `${firstName} retires in ${retirement} years`;
+}
+
+console.log(yearsUntilRetirement(1991, 'Jonas'));
+console.log(yearsUntilRetirement(1980, 'Bob'));
+
+function cutFruitPieces(fruit) {
+    return fruit * 4;
+}
+
+function fruitProcessor(apples, oranges) {
+    const applePieces = cutFruitPieces(apples);
+    const orangePieces = cutFruitPieces(oranges);
+    const juice = `Juice with ${applePieces} piece of apples and ${orangePieces} piece of oranges`;
+    return juice;
+}
+
+console.log(fruitProcessor(2, 3));
+
+const calcAge = function(birthYear) {
+    return 2037 - birthYear;
+}
+
+const yearsUntilRetirement = function (birthYear, firstName) {
+    const age = calcAge(birthYear);
+    const retirement = 65 - age;
+
+    if(retirement > 0) {
+        console.log(`${firstName} retires in ${retirement} years`);
+        return retirement;
+    } else {
+        console.log(`${firstName} has already retired`);
+        return -1;
+    }
+}
+
+console.log(yearsUntilRetirement(1994, 'Caroline'));
+console.log(yearsUntilRetirement(1950, 'Conn'));*/
+
 // ASSIGNMENTS
 
-function describeCountry(country, population, capitalCity) {
+/*function describeCountry(country, population, capitalCity) {
     const str = `${country} has ${population} million people and its capital city is ${capitalCity}`
     return str;
 }
@@ -81,3 +128,19 @@ const india2 = percentageOfWorld2(1392);
 const usa2 = percentageOfWorld2(335);
 
 console.log(china2, india2, usa2);
+
+const percentageOfWorld3 = population => (population / 7900) * 100;
+const china3 = percentageOfWorld3(1411);
+const india3 = percentageOfWorld3(1392);
+const usa3 = percentageOfWorld3(335);
+console.log(china3, india3, usa3);
+
+function describePopulation(country, population) {
+    const percentage = percentageOfWorld1(population);
+    return `${country} has ${population} million people, which is about ${percentage}% of the world.`;
+}
+
+console.log(describePopulation('Brazil', 214));
+console.log(describePopulation('Ireland', 5));*/
+
+// CHALLENGES

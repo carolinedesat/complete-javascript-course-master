@@ -115,7 +115,7 @@ console.log(friends);
 
 const firstName = 'jonas';
 const jonas = [firstName, 'Schmedtmann', 2037 - 1991, 'teacher', friends];
-console.log(jonas);*/
+console.log(jonas);
 
 // Exercise
 const calcAge = function (birthYear) {
@@ -131,10 +131,100 @@ console.log(age1, age2, age3);
 const ages = [calcAge(years[0]), calcAge(years[1]), calcAge(years[years.length - 1])];
 console.log(ages);
 
+const friends = ['Michael', 'Steven', 'Peter'];
+const newLength = friends.push('Jay'); // Adds to the end
+console.log(friends);
+console.log(newLength);
+
+friends.unshift('John'); // Adds to the start
+console.log(friends);
+
+friends.pop(); // Removes the last
+const popped = friends.pop();
+console.log(friends);
+console.log(popped);
+
+friends.shift(); // Removes the first
+console.log(friends);
+
+console.log(friends.indexOf('Steven'));
+console.log(friends.indexOf('Bob'));
+
+friends.push(23);
+console.log(friends.includes('Steven')); // True
+console.log(friends.includes('Bob')); // False
+console.log(friends.includes(23)); // True
+console.log(friends.includes('23')); // False
+
+if (friends.includes('Steven')) {
+    console.log('You have a friend called Steven');
+}
+
+// Object Literal Syntax, use for unstructured data
+const jonas = {
+    firstName: 'Jonas',
+    lastName: 'Schmedtmann',
+    age: 2037 - 1991,
+    job: 'teacher',
+    friends: ['Michael', 'Peter', 'Steven']
+};
+
+console.log(jonas);
+console.log(jonas.lastName);
+console.log(jonas['lastName']);
+
+const nameKey = 'Name';
+console.log(jonas['first' + nameKey]);
+console.log(jonas['last' + nameKey]);
+
+const interestedIn = prompt('What do you want to know about Jonas? Choose between firstName, lastName, age, job, and friends');
+
+if (jonas[interestedIn]) {
+    console.log(jonas[interestedIn]);
+} else {
+    console.log('Wrong request! Choose between firstName, lastName, age, job, and friends');
+}
+
+jonas.location = 'Portugal';
+jonas['twitter'] = '@jonas';
+console.log(jonas);
+
+console.log(`${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}`);*/
+
+const jonas = {
+    firstName: 'Jonas',
+    lastName: 'Schmedtmann',
+    birthYear: 1991,
+    job: 'teacher',
+    friends: ['Michael', 'Peter', 'Steven'],
+    hasDriversLicense: true,
+
+    // calcAge: function (birthYear) {
+    //     return 2024 - birthYear;
+    // }
+
+    // calcAge: function () {
+    //     return 2024 - this.birthYear;
+    // }
+
+    calcAge: function () {
+        this.age = 2024 - this.birthYear;
+        return this.age;
+    },
+
+    getSummary: function () {
+        return `${this.firstName} is a ${this.calcAge()} year old ${this.job}, and he has ${this.hasDriversLicense ? 'a' : 'no'} driver's license`;
+    }
+};
+
+console.log(jonas.calcAge());
+console.log(jonas.age);
+console.log(jonas.getSummary());
+
 // ASSIGNMENTS
 
 /*function describeCountry(country, population, capitalCity) {
-    const str = `${country} has ${population} million people and its capital city is ${capitalCity}`
+    const str = `${ country } has ${ population } million people and its capital city is ${ capitalCity }`
     return str;
 }
 
@@ -173,7 +263,7 @@ console.log(china3, india3, usa3);
 
 function describePopulation(country, population) {
     const percentage = percentageOfWorld1(population);
-    return `${country} has ${population} million people, which is about ${percentage}% of the world.`;
+    return `${ country } has ${ population } million people, which is about ${ percentage } % of the world.`;
 }
 
 console.log(describePopulation('Brazil', 214));
@@ -190,9 +280,9 @@ console.log(scoreDolphins, scoreKoalas);
 
 function checkWinner(avgDolphins, avgKoalas) {
     if (avgDolphins >= 2 * avgKoalas) {
-        console.log(`Dolphins win (${avgDolphins} vs ${avgKoalas})`);
+        console.log(`Dolphins win(${ avgDolphins } vs ${ avgKoalas })`);
     } else if (avgKoalas >= 2 * avgDolphins) {
-        console.log(`Koalas win (${avgKoalas} vs ${avgDolphins})`);
+        console.log(`Koalas win(${ avgKoalas } vs ${ avgDolphins })`);
     } else {
         console.log('No team wins');
     }
@@ -204,4 +294,48 @@ checkWinner(scoreDolphins, scoreKoalas);
 scoreDolphins = calcAverage(85, 54, 41);
 scoreKoalas = calcAverage(23, 34, 27);
 console.log(scoreDolphins, scoreKoalas);
-checkWinner(scoreDolphins, scoreKoalas);*/
+checkWinner(scoreDolphins, scoreKoalas);
+
+// function calcTip(bill) {
+//     if (bill >= 50 && bill <= 300) {
+//         return bill * 0.15;
+//     } else {
+//         return bill * 0.2;
+//     }
+// }
+
+const calcTip = bill => bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+
+const bills = [125, 555, 44];
+const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
+const totals = [(bills[0]) + (tips[0]), (bills[1]) + (tips[1]), (bills[2]) + (tips[2])];
+console.log(bills, tips, totals);*/
+
+const mark = {
+    fullName: 'Mark Miller',
+    mass: 78,
+    height: 1.69,
+    calcBMI: function () {
+        this.BMI = this.mass / (this.height * this.height);
+        return this.BMI;
+    }
+};
+
+const john = {
+    fullName: 'John Smith',
+    mass: 92,
+    height: 1.95,
+    calcBMI: function () {
+        this.BMI = this.mass / (this.height * this.height);
+        return this.BMI;
+    }
+};
+
+mark.calcBMI();
+john.calcBMI();
+
+if (mark.BMI > john.BMI) {
+    console.log(`${mark.fullName}'s BMI (${mark.BMI}) is higher than ${john.fullName}'s BMI (${john.BMI})`);
+} else if (john.BMI > mark.BMI) {
+    console.log(`${john.fullName}'s BMI (${john.BMI}) is higher than ${mark.fullName}'s BMI (${mark.BMI})`);
+}

@@ -189,7 +189,7 @@ jonas.location = 'Portugal';
 jonas['twitter'] = '@jonas';
 console.log(jonas);
 
-console.log(`${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}`);*/
+console.log(`${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}`);
 
 const jonas = {
     firstName: 'Jonas',
@@ -220,6 +220,91 @@ const jonas = {
 console.log(jonas.calcAge());
 console.log(jonas.age);
 console.log(jonas.getSummary());
+
+//console.log('Lifting weights repetition 1');
+
+// For loop keeps running while condition (middle) is true
+for(let rep = 1; rep <= 10; rep++) {
+    console.log(`Lifting weights repetition ${rep}`);
+}
+
+const jonasArray = [
+    'Jonas',
+    'Schmedtmann',
+    2037 - 1991,
+    'teacher',
+    ['Michael', 'Peter', 'Steven'],
+    true
+];
+
+const types = [];
+
+for (let i = 0; i < jonasArray.length; i++) {
+
+    // Reading from jonas array
+    console.log(jonasArray[i], typeof jonasArray[i]);
+
+    // Fillin the types array
+    //types[i] = typeof jonasArray[i];
+    types.push(typeof jonasArray [i]);
+}
+
+console.log(types);
+
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+
+for (let i = 0; i < years.length; i++) {
+    ages.push(2024 - years[i]);
+}
+
+console.log(ages);
+
+// Continue and break
+console.log('----- ONLY STRINGS -----');
+for (let i = 0; i < jonasArray.length; i++) {
+    if(typeof jonasArray[i] !== 'string') continue;
+
+    console.log(jonasArray[i], typeof jonasArray[i]);
+}
+
+console.log('----- BREAK WITH NUMBER -----');
+for (let i = 0; i < jonasArray.length; i++) {
+    if(typeof jonasArray[i] === 'number') break;
+
+    console.log(jonasArray[i], typeof jonasArray[i]);
+}
+
+const jonasArray = [
+    'Jonas',
+    'Schmedtmann',
+    2037 - 1991,
+    'teacher',
+    ['Michael', 'Peter', 'Steven'],
+    true
+];
+
+for(let i = jonasArray.length - 1; i >= 0; i--) {
+    console.log(jonasArray[i])
+}
+
+for(let exercise = 1; exercise <= 3; exercise++) {
+    console.log(`----- Starting exercise ${exercise} -----`);
+
+    for(let rep = 1; rep <= 5; rep++) {
+        console.log(`Exercise ${exercise}: Lifting weight repetition ${rep}`);
+    }
+}
+
+for(let rep = 1; rep <= 10; rep++) {
+    console.log(`FOR: Lifting weights repetition ${rep}`);
+}*/
+
+let rep = 1;
+while(rep <= 10) {
+    console.log(`WHILE: Lifting weights repetition ${rep}`);
+    rep++;
+}
 
 // ASSIGNMENTS
 
@@ -309,7 +394,7 @@ const calcTip = bill => bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
 const bills = [125, 555, 44];
 const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
 const totals = [(bills[0]) + (tips[0]), (bills[1]) + (tips[1]), (bills[2]) + (tips[2])];
-console.log(bills, tips, totals);*/
+console.log(bills, tips, totals);
 
 const mark = {
     fullName: 'Mark Miller',
@@ -338,4 +423,4 @@ if (mark.BMI > john.BMI) {
     console.log(`${mark.fullName}'s BMI (${mark.BMI}) is higher than ${john.fullName}'s BMI (${john.BMI})`);
 } else if (john.BMI > mark.BMI) {
     console.log(`${john.fullName}'s BMI (${john.BMI}) is higher than ${mark.fullName}'s BMI (${mark.BMI})`);
-}
+}*/

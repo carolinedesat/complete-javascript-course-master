@@ -360,7 +360,115 @@ function describePopulation(country, population) {
 }
 
 console.log(describePopulation('Brazil', 214));
-console.log(describePopulation('Ireland', 5));*/
+console.log(describePopulation('Ireland', 5));
+
+const populations = [1411, 1392, 335, 214];
+
+// if (populations.length === 4) {
+//     console.log(true);
+// } else {
+//     console.log(false);
+// }
+
+console.log(populations.length === 4);
+
+const percentages = [];
+
+function percentageOfWorld1(population) {
+    return (population / 7900) * 100;
+}
+
+for (let i = 0; i < populations.length; i++) {
+    percentages.push(percentageOfWorld1([populations[i]]));
+}
+
+console.log(percentages);
+
+const neighbours = ['Argentina', 'Uruguai', 'Paraguai'];
+
+neighbours.push('Utopia');
+console.log(neighbours);
+
+neighbours.pop();
+console.log(neighbours);
+
+//console.log(neighbours.includes('Germany') ? '' : 'Probably not a south american country');
+
+if(!neighbours.includes('Germany')) {
+    console.log('Probably not a south american country');
+}
+
+// neighbours.indexOf('Paraguai');
+// neighbours[2] = 'Peru'
+
+neighbours[neighbours.indexOf('Paraguai')] = 'Peru';
+console.log(neighbours);
+
+const myCountry = {
+    country: 'Brazil',
+    capital: 'Brasilia',
+    language: 'Portuguese',
+    population: 214,
+    neighbours: ['Argentina', 'Uruguai', 'Paraguai'],
+    describe: function() {
+        return `${this.country} has ${this.population} million ${this.language}-speaking people, ${this.neighbours.length} neighbouring countries and a capital called ${this.capital}`;
+    },
+    checkIsland: function() {
+        const isIsland = this.neighbours.length === 0 ? true : false;
+        return isIsland;
+    }
+};
+
+// console.log(myCountry.population += 2);
+// console.log(myCountry['population'] -= 2)
+
+myCountry.population += 2;
+console.log(myCountry.population);
+
+myCountry['population'] -= 2;
+console.log(myCountry.population);
+
+console.log(myCountry.checkIsland());
+console.log(myCountry.describe());
+console.log(myCountry);
+
+for(let voters = 1; voters <= 50; voters++) {
+    console.log(`Voter number ${[voters]} is currently voting`);
+}
+
+const populations = [1411, 1392, 335, 214];
+const percentages = [];
+
+function percentageOfWorld1(population) {
+    return (population / 7900) * 100;
+}
+
+for(let i = 0; i < populations.length; i++) {
+    percentages.push(percentageOfWorld1(populations[i]))
+}
+console.log(percentages);
+
+const listOfNeighbours = [['Canada', 'Mexico'], ['Spain'], ['Norway', 'Sweden', 'Russia']];
+
+for (let i = 0; i < listOfNeighbours.length; i++) {
+    for (let j = 0; j < listOfNeighbours[i].length; j++)
+        console.log(`Neighbour: ${listOfNeighbours[i][j]}`);
+}*/
+
+const populations = [1411, 1392, 335, 214];
+const percentages = [];
+
+function percentageOfWorld1(population) {
+    return (population / 7900) * 100;
+}
+
+let counter = 0;
+while(counter < populations.length) {
+    percentages.push(percentageOfWorld1(populations[counter]));
+    counter++;
+}
+
+console.log(percentages);
 
 // CHALLENGES
 
@@ -431,7 +539,7 @@ if (mark.BMI > john.BMI) {
     console.log(`${mark.fullName}'s BMI (${mark.BMI}) is higher than ${john.fullName}'s BMI (${john.BMI})`);
 } else if (john.BMI > mark.BMI) {
     console.log(`${john.fullName}'s BMI (${john.BMI}) is higher than ${mark.fullName}'s BMI (${mark.BMI})`);
-}*/
+}
 
 const calcTip = function (bill) {
     return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
@@ -458,4 +566,4 @@ const calcTip = function (bill) {
       return sum / arr.length;
   }
   
-  console.log(`The average is: ${calcAverage(totals)}`);
+  console.log(`The average is: ${calcAverage(totals)}`);*/

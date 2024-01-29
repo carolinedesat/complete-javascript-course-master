@@ -29,12 +29,18 @@ const restaurant = {
 
   order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-
   },
 
-  orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time = '20:00', address }) {
-    console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
-  }
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
 };
 
 /*restaurant.orderDelivery({ time: '22:30', address: '1 Olney Mews', mainIndex: 2, starterIndex: 2 });
@@ -118,15 +124,17 @@ console.log(fiveStarRatings, oneStarRatings, threeStarRatings);*/
 const books = [
   {
     title: 'Algorithms',
+    author: 'Robert Sedgewick',
+    ISBN: '0123456789',
     thirdParty: {
       goodreads: {
         rating: 4.41,
         ratingsCount: 1733,
         reviewsCount: 63,
         fiveStarRatingCount: 976,
-        oneStarRatingCount: 13
-      }
-    }
+        oneStarRatingCount: 13,
+      },
+    },
   },
   'The Maid',
   'The Housemaid',
@@ -134,11 +142,11 @@ const books = [
   'Fahrenheit 451',
   'Fight Club',
   'Trainspotting',
-  'The Outsiders'
+  'The Outsiders',
 ];
 
-const printBookInfo = function (title, author, year) {
-  return `${title} by ${author}, ${year}`.
+function printBookInfo({ title, author, year = 'year unknown' }) {
+  console.log(`${title} by ${author}, ${year}`);
 }
 
 const { title, author, ISBN } = books[0];
@@ -155,8 +163,18 @@ let bookAuthor = 'unknown';
 ({ title: bookTitle, author: bookAuthor } = books[0]);
 console.log(title, author);
 
-const { thirdParty: { goodreads: { rating: bookRating } } } = books[0]
+const {
+  thirdParty: {
+    goodreads: { rating: bookRating },
+  },
+} = books[0];
 console.log(bookRating);
+
+printBookInfo({
+  title: 'Algorithms',
+  author: 'Robert Sedgewick',
+  year: '2011',
+});
 
 // const { name, openingHours, categories } = restaurant;
 // console.log(name, openingHours, categories);

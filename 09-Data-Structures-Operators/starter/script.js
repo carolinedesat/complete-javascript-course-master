@@ -41,7 +41,52 @@ const restaurant = {
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
   },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`);
+  }
 };
+
+const arr = [7, 8, 9];
+const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badNewArr);
+
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+
+console.log(...newArr);
+console.log(1, 2, 7, 8, 9);
+
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+// Copy array
+const mainMenuCopy = [...restaurant.mainMenu];
+const starterMenuCopy = [...restaurant.starterMenu];
+
+//Join 2 arrays
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
+
+// Iterables are arrays, strings, maps, sets. NOT objects
+const str = 'Caroline';
+const letters = [...str, '', 'S.'];
+console.log(letters);
+console.log(...str);
+// console.log(`${...str}`);
+
+// const ingredients = [prompt("Let's make pasta! Ingredient 1?"), prompt('Ingredient 2?'), prompt('Ingredient 3?')];
+// console.log(ingredients);
+// restaurant.orderPasta(...ingredients);
+
+// Objects
+const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Guiseppe' };
+console.log(newRestaurant);
+
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorante Roma';
+console.log(restaurantCopy.name);
+console.log(restaurant.name);
 
 /*restaurant.orderDelivery({ time: '22:30', address: '1 Olney Mews', mainIndex: 2, starterIndex: 2 });
 
@@ -119,7 +164,7 @@ console.log(rating, ratingsCount);
 
 const ratingStars = [63405, 1808];
 const [fiveStarRatings, oneStarRatings, threeStarRatings = 0] = ratingStars;
-console.log(fiveStarRatings, oneStarRatings, threeStarRatings);*/
+console.log(fiveStarRatings, oneStarRatings, threeStarRatings);
 
 const books = [
   {
@@ -174,26 +219,4 @@ printBookInfo({
   title: 'Algorithms',
   author: 'Robert Sedgewick',
   year: '2011',
-});
-
-// const { name, openingHours, categories } = restaurant;
-// console.log(name, openingHours, categories);
-
-// const { name: restaurantName, openingHours: hours, categories: tags } = restaurant;
-// console.log(restaurantName, hours, tags);
-
-// // Default values
-// const { menu = [], starterMenu: starters = [] } = restaurant;
-// console.log(menu, starters);
-
-// // Mutating variables
-// let a = 111;
-// let b = 999;
-// const obj = { a: 23, b: 7, c: 14 };
-
-// ({ a, b } = obj);
-// console.log(a, b);
-
-// // Nested objects
-// const { fri: { open: o, close: c } } = openingHours;
-// console.log(o, c);
+});*/

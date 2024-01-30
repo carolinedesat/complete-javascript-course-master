@@ -43,9 +43,57 @@ const restaurant = {
   },
 
   orderPasta: function (ing1, ing2, ing3) {
-    console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`);
-  }
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(
+      `The main ingredient is ${mainIngredient} and the other ingrediants are ${otherIngredients}`
+    );
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
+
+/*
+// 1) Destructuring
+
+// SPREAD, because on RIGHT side of =
+const arr = [1, 2, ...[3, 4]];
+console.log(arr);
+
+// REST, because on LEFT side of =
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others);
+
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFood);
+
+// Objects
+const { sat, ...weekDays } = restaurant.openingHours;
+console.log(weekDays);
+
+// 2) Functions
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+  console.log(sum);
+};
+
+add(2, 3);
+add(5, 3, 7, 2);
+add(8, 2, 5, 3, 2, 1, 4);
+
+const x = [23, 5, 7];
+add(...x);
+
+restaurant.orderPizza('mushrooms', 'onions', 'olives', 'spinach');
+restaurant.orderPizza('mushrooms');
 
 const arr = [7, 8, 9];
 const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
@@ -88,7 +136,7 @@ restaurantCopy.name = 'Ristorante Roma';
 console.log(restaurantCopy.name);
 console.log(restaurant.name);
 
-/*restaurant.orderDelivery({ time: '22:30', address: '1 Olney Mews', mainIndex: 2, starterIndex: 2 });
+restaurant.orderDelivery({ time: '22:30', address: '1 Olney Mews', mainIndex: 2, starterIndex: 2 });
 
 restaurant.orderDelivery({ address: '1 Olney Mews', starterIndex: 2 });
 
@@ -151,6 +199,7 @@ console.log(i, j, k);
 // Default values
 const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r);*/
+
 // Assignments
 /**const books = ['The Maid', 'The Housemaid', 'The Mists of Avalon'];
 const [firstBook, secondBook] = books;
@@ -220,3 +269,95 @@ printBookInfo({
   author: 'Robert Sedgewick',
   year: '2011',
 });*/
+
+const books = [
+  {
+    title: 'Algorithms',
+    author: 'Robert Sedgewick',
+    ISBN: '0123456789',
+    Keywords: ['Programming', 'Data', 'IT'],
+    thirdParty: {
+      goodreads: {
+        rating: 4.41,
+        ratingsCount: 1733,
+        reviewsCount: 63,
+        fiveStarRatingCount: 976,
+        oneStarRatingCount: 13,
+      },
+    },
+  },
+  {
+    title: 'The Mists of Avalon',
+    author: 'Marion Zimmer Bradley',
+    ISBN: '0123456789',
+    Keywords: ['Legend', 'Religion', 'Mysticism'],
+    thirdParty: {
+      goodreads: {
+        rating: 4.41,
+        ratingsCount: 1733,
+        reviewsCount: 63,
+        fiveStarRatingCount: 976,
+        oneStarRatingCount: 13,
+      },
+    },
+  },
+];
+
+const spellWord = function (str) {
+  console.log(...str);
+};
+
+const bookAuthors = [...books[0].author, ...books[1].author];
+console.log(bookAuthors);
+spellWord('Caroline');
+
+const [mainKeyword, ...rest] = books[0].Keywords;
+console.log(mainKeyword);
+console.log(rest);
+
+const { publisher: bookPublisher, ...restOfTheBook } = books[1];
+console.log(bookPublisher);
+console.log(restOfTheBook);
+
+const printBookAuthorsCount = function (title, ...authors) {
+  console.log(`The book ${title} has ${authors.length} authors`);
+};
+
+printBookAuthorsCount('Algorithms', 'Robert Sedgewick', 'Kevin Wayne');
+
+// // 1) Destructuring
+
+// // SPREAD, because on RIGHT side of =
+// const arr = [1, 2, ...[3, 4]];
+// console.log(arr);
+
+// // REST, because on LEFT side of =
+// const [a, b, ...others] = [1, 2, 3, 4, 5];
+// console.log(a, b, others);
+
+// const [pizza, , risotto, ...otherFood] = [
+//   ...restaurant.mainMenu,
+//   ...restaurant.starterMenu,
+// ];
+// console.log(pizza, risotto, otherFood);
+
+// // Objects
+// const { sat, ...weekDays } = restaurant.openingHours;
+// console.log(weekDays);
+
+// // 2) Functions
+// const add = function (...numbers) {
+//   let sum = 0;
+//   for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+//   console.log(sum);
+// };
+
+// add(2, 3);
+// add(5, 3, 7, 2);
+// add(8, 2, 5, 3, 2, 1, 4);
+
+// const x = [23, 5, 7];
+// add(...x);
+
+// restaurant.orderPizza('mushrooms', 'onions', 'olives', 'spinach');
+// restaurant.orderPizza('mushrooms');

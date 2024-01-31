@@ -57,7 +57,76 @@ const restaurant = {
   },
 };
 
-/*
+/*const rest1 = {
+  name: 'Capri',
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+// OR assignment operator
+
+// rest1.numGuests = rest1.numGuests || 10;
+// rest2.numGuests = rest2.numGuests || 10;
+
+// rest1.numGuests ||= 10;
+// rest2.numGuests ||= 10;
+
+// nullish assignment operator (null or undefined)
+
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+// rest1.owner = rest1.owner && '<ANNONYMOUS';
+// rest2.owner = rest2.owner && '<ANNONYMOUS';
+
+rest1.owner &&= '<ANNONYMOUS';
+rest2.owner &&= '<ANNONYMOUS';
+
+console.log(rest1);
+console.log(rest2);
+
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests);
+
+// Nullish: null and undefines (NOT 0 or '');
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
+
+console.log('----- OR -----');
+
+//Use ANY data type, return ANY data type, short-circuiting
+console.log(3 || 'Caroline');
+console.log('' || 'Caroline');
+console.log(true || 0);
+console.log(undefined || null); // undefined is falsy
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+restaurant.numGuests = 0;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+console.log('----- AND -----');
+
+console.log(0 && 'Caroline');
+console.log(7 && 'Caroline');
+
+console.log('Hello' && 23 && null && 'Caroline');
+
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+
 // 1) Destructuring
 
 // SPREAD, because on RIGHT side of =
@@ -268,7 +337,7 @@ printBookInfo({
   title: 'Algorithms',
   author: 'Robert Sedgewick',
   year: '2011',
-});*/
+});
 
 const books = [
   {
@@ -276,6 +345,8 @@ const books = [
     author: 'Robert Sedgewick',
     ISBN: '0123456789',
     Keywords: ['Programming', 'Data', 'IT'],
+    programmingLanguage: 'Java',
+    edition: 'first',
     thirdParty: {
       goodreads: {
         rating: 4.41,
@@ -291,6 +362,8 @@ const books = [
     author: 'Marion Zimmer Bradley',
     ISBN: '0123456789',
     Keywords: ['Legend', 'Religion', 'Mysticism'],
+    onlineContent: true,
+    highlighted: true,
     thirdParty: {
       goodreads: {
         rating: 4.41,
@@ -325,39 +398,106 @@ const printBookAuthorsCount = function (title, ...authors) {
 
 printBookAuthorsCount('Algorithms', 'Robert Sedgewick', 'Kevin Wayne');
 
-// // 1) Destructuring
+const hasExamplesInJava = function (book) {
+  return book.programmingLanguage === 'Java' || 'No data available';
+}
 
-// // SPREAD, because on RIGHT side of =
-// const arr = [1, 2, ...[3, 4]];
-// console.log(arr);
+console.log(hasExamplesInJava(books[0]));
 
-// // REST, because on LEFT side of =
-// const [a, b, ...others] = [1, 2, 3, 4, 5];
-// console.log(a, b, others);
+for (let i = 0; i < books.length; i++) {
+  books[i].onlineContent && console.log(`"${books[i].title}" provides online content`);
+}
 
-// const [pizza, , risotto, ...otherFood] = [
-//   ...restaurant.mainMenu,
-//   ...restaurant.starterMenu,
-// ];
-// console.log(pizza, risotto, otherFood);
+for (let i = 0; i < books.length; i++) {
+  books[i].onlineContent ?? console.log(`"${books[i].title}" provides no data about its online content`);
+}
 
-// // Objects
-// const { sat, ...weekDays } = restaurant.openingHours;
-// console.log(weekDays);
+for (let i = 0; i < books.length; i++) {
+  console.log(books[i].edition ||= 1);
+}
 
-// // 2) Functions
-// const add = function (...numbers) {
-//   let sum = 0;
-//   for (let i = 0; i < numbers.length; i++) sum += numbers[i];
-//   console.log(sum);
-// };
+for (let i = 0; i < books.length; i++) {
+  console.log(books[i].highlighted &&= !(books[i].thirdParty.goodreads.rating < 4.2));
+}
 
-// add(2, 3);
-// add(5, 3, 7, 2);
-// add(8, 2, 5, 3, 2, 1, 4);
+// CHALLENGES
 
-// const x = [23, 5, 7];
-// add(...x);
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
 
-// restaurant.orderPizza('mushrooms', 'onions', 'olives', 'spinach');
-// restaurant.orderPizza('mushrooms');
+// const players1 = [...game.players[0]];
+// const players2 = [...game.players[1]];
+// console.log(players1);
+// console.log(players2);
+const [players1, players2] = game.players;
+console.log(players1, players2);
+
+const [gk, ...fieldPlayers] = players1;
+console.log(gk, fieldPlayers);
+
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Periscic'];
+console.log(players1Final);
+
+// const team1 = game.odds.team1;
+// const draw = game.odds.x;
+// const team2 = game.odds.team2;
+// console.log(team1, draw, team2);
+
+// const { team1, x: draw, team2 } = game.odds;
+// console.log(team1, draw, team2);
+
+const { odds: { team1, x: draw, team2 }, } = game;
+console.log(team1, draw, team2);
+
+const printGoals = function (...players) {
+  console.log(players);
+  console.log(`${players.length} goeals were scored`);
+}
+
+// printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+// printGoals('Davies', 'Muller');
+printGoals(...game.scored);
+
+team1 < team2 && console.log('Team 1 is more likely to win');
+team1 > team2 && console.log('Team 2 is more likely to win');*/

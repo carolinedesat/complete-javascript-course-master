@@ -4,6 +4,22 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
 // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
@@ -12,26 +28,14 @@ const restaurant = {
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
+  // ES6 enhanced object literals
+  openingHours,
 
-  order: function (starterIndex, mainIndex) {
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
-  orderDelivery: function ({
+  orderDelivery({
     starterIndex = 1,
     mainIndex = 0,
     time = '20:00',
@@ -42,13 +46,13 @@ const restaurant = {
     );
   },
 
-  orderPasta: function (ing1, ing2, ing3) {
+  orderPasta(ing1, ing2, ing3) {
     console.log(
       `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
     );
   },
 
-  orderPizza: function (mainIngredient, ...otherIngredients) {
+  orderPizza(mainIngredient, ...otherIngredients) {
     console.log(
       `The main ingredient is ${mainIngredient} and the other ingrediants are ${otherIngredients}`
     );
@@ -57,7 +61,69 @@ const restaurant = {
   },
 };
 
-/*const rest1 = {
+/*
+const properties = Object.keys(openingHours);
+console.log(properties);
+
+let openStr = `We are open on ${properties.length} days: `;
+
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+
+console.log(openStr);
+
+// Property VALUES
+const values = Object.values(openingHours);
+console.log(values);
+
+// Entire object
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for (const [day, { open, close }] of entries) {
+  console.log(`On ${day} we open at ${open} and close at ${close}`);
+}
+
+if (restaurant.openingHours && restaurant.openingHours.mon) console.log(restaurant.openingHours.mon.open);
+
+//console.log(restaurant.openingHours.mon.open);
+
+// WITH optional chaining
+console.log(restaurant.openingHours.mon?.open);
+console.log(restaurant.openingHours?.mon?.open);
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+// Methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+
+// Arrays
+const users = [
+  { name: 'Caroline', email: 'caroline.desat@gmail.com' }
+];
+
+console.log(users[0]?.name ?? 'User array empty');
+
+if (users.length > 0) console.log(users[0].name); else console.log('User array empty');
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu) console.log(item);
+
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
+
+console.log([...menu.entries()]);
+
+const rest1 = {
   name: 'Capri',
   numGuests: 0,
 };
@@ -344,9 +410,10 @@ const books = [
     title: 'Algorithms',
     author: 'Robert Sedgewick',
     ISBN: '0123456789',
-    Keywords: ['Programming', 'Data', 'IT'],
+    keywords: ['Programming', 'Data', 'IT'],
     programmingLanguage: 'Java',
     edition: 'first',
+    pages: 750,
     thirdParty: {
       goodreads: {
         rating: 4.41,
@@ -361,9 +428,10 @@ const books = [
     title: 'The Mists of Avalon',
     author: 'Marion Zimmer Bradley',
     ISBN: '0123456789',
-    Keywords: ['Legend', 'Religion', 'Mysticism'],
+    keywords: ['Legend', 'Religion', 'Mysticism'],
     onlineContent: true,
     highlighted: true,
+    pages: 1420,
     thirdParty: {
       goodreads: {
         rating: 4.41,
@@ -420,7 +488,74 @@ for (let i = 0; i < books.length; i++) {
   console.log(books[i].highlighted &&= !(books[i].thirdParty.goodreads.rating < 4.2));
 }
 
+let pageSum = 0;
+for (let book of books) {
+  pageSum += book.pages;
+}
+console.log(pageSum);
+
+const allAuthors = [];
+for (let book of books) {
+  allAuthors.push(book.author);
+}
+console.log(allAuthors);
+
+for (let [i, author] of allAuthors.entries()) {
+  console.log(`${i + 1}: ${author}`)
+}
+
+const bookData = [
+  ['title', 'Computer Networking: A Top-Down Approach'],
+  ['author', ['James F. Kurose', 'Keith W. Ross']],
+  ['publisher', 'Addison Wesley'],
+];
+
+// Do the rest
+const newBook = {
+  [bookData[0][0]]: bookData[0][1],
+  [bookData[1][0]]: bookData[1][1],
+  [bookData[2][0]]: bookData[2][1],
+};
+
+console.log(newBook);
+
+const pages = 880;
+
+const newBook2 = {
+  title: 'The C Programming Language',
+  author: ['Brian W. Kernighan', 'Dennis M. Ritchie'],
+  pages
+}
+
+console.log(newBook2);
+
+const getFirstKeyword = function (book) {
+  console.log(book.keywords?.[0] ?? 'Does not exist');
+}
+
+getFirstKeyword(books[0]);
+
+const entries = [];
+
+const properties = Object.keys(books[0].thirdParty.goodreads);
+
+for (const key of properties) {
+  entries.push([key]);
+}
+
+const values = Object.values(books[0].thirdParty.goodreads).entries();
+
+for (const [index, value] of values) {
+  entries[index].push(value);
+}
+
+const entries2 = Object.entries(books[0].thirdParty.goodreads);
+
+console.log(entries);
+console.log(entries2);
+
 // CHALLENGES
+// CHALLENGE 1
 
 const game = {
   team1: 'Bayern Munich',
@@ -501,3 +636,75 @@ printGoals(...game.scored);
 
 team1 < team2 && console.log('Team 1 is more likely to win');
 team1 > team2 && console.log('Team 2 is more likely to win');*/
+
+// CHALLENGE 2
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+// let openStr = `We are open on ${properties2.length} days: `;
+
+// for (const day of properties2) {
+//   openStr += `${day}, `;
+// }
+
+const entries = Object.entries(game.scored);
+for (const [goals, scored] of entries) {
+  console.log(`Goal ${goals}: ${scored}`);
+}
+
+let sum = 0;
+const values = Object.values(game.odds);
+for (const odds of values) {
+  sum += odds;
+}
+
+const average = sum / values.length;
+console.log(average);
+
+const { team1, x: draw, team2 } = game;
+console.log(team1, draw, team2);
+
+const key = Object.keys(game);
+
+for (const odds of values) {
+  console.log(`Odd of victory: ${odds}`);
+}

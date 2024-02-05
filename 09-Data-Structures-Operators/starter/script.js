@@ -4,6 +4,22 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
+const getCode = str => str.slice(0, 3).toUpperCase();
+
+for (const flight of flights.split('+')) {
+  const [type, from, to, time] = flight.split(';');
+
+  const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll(
+    '_',
+    ' '
+  )} ${getCode(from)} from ${getCode(to)} to (${time.replace(
+    ':',
+    'h'
+  )})`.padStart(46);
+
+  console.log(output);
+}
+
 const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 const openingHours = {
   [weekdays[3]]: {
@@ -35,12 +51,7 @@ const restaurant = {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
-  orderDelivery({
-    starterIndex = 1,
-    mainIndex = 0,
-    time = '20:00',
-    address,
-  }) {
+  orderDelivery({ starterIndex = 1, mainIndex = 0, time = '20:00', address }) {
     console.log(
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
@@ -62,6 +73,280 @@ const restaurant = {
 };
 
 /*
+// Split and join
+console.log('a+very+nice+string'.split('+'));
+console.log('Conn Hannigan'.split(' '));
+
+const [firstName, lastName] = 'Conn Hannigan'.split(' ');
+
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' '));
+};
+
+capitalizeName('jessica ann smith davis');
+capitalizeName('caroline de sa teixeira');
+
+// Padding
+const message = 'Go to gate 23!';
+console.log(message.padStart(20, '+').padEnd(30, '+'));
+console.log('Caroline'.padStart(20, '+').padEnd(30, '+'));
+
+const maskCreditCard = function (number) {
+  const str = number + '';
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCreditCard(4335899765520114));
+console.log(maskCreditCard('63521402875402369852'));
+
+// Repeat
+
+const message2 = 'Bad weather... All Departures Delayed... ';
+console.log(message2.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'*'.repeat(n)}`);
+};
+
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
+
+const airline = 'TAP Air Portugal';
+
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+// Fix capitalization in name
+const passenger = 'cArolinE';
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+const correctPassengerName = function (name) {
+  const nameLower = name.toLowerCase();
+  return nameLower[0].toUpperCase() + nameLower.slice(1);
+};
+
+console.log(correctPassengerName('cONN'));
+console.log(correctPassengerName('pAMeLa'));
+
+// Comparing email
+const email = 'caroline.desat@gmail.com';
+const loginEmail = '   Caroline.Desat@gmail.com';
+
+// const lowerEmail = loginEmail.toLowerCase();
+// const trimmedEmail = lowerEmail.trim();
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail);
+
+const correctEmail = function (rightEmail, wrongEmail) {
+  if (rightEmail === wrongEmail.toLowerCase().trim()) return true;
+  else return false;
+};
+
+console.log(
+  correctEmail('caroline.desat@gmail.com', '   Caroline.Desat@gmail.com')
+);
+
+// Replacing
+
+const priceGB = '288,97£';
+const priceUS = priceGB.replace('£', '$').replace(',', '.');
+console.log(priceUS);
+
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23!';
+console.log(announcement.replaceAll('door', 'gate'));
+console.log(announcement.replace(/door/g, 'gate'));
+
+// Booleans
+const plane = 'Airbus 320neo';
+console.log(plane.includes('A320'));
+console.log(plane.includes('Boeing'));
+console.log(plane.startsWith('Airb'));
+
+if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+  console.log('Part of the NEW ARibus family');
+}
+
+// Practice exercise
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are not allowed on board');
+  } else {
+    console.log('Welcome aboard!');
+  }
+};
+
+checkBaggage('I have a laptop, some Food and a pocket Knife');
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a gun for protection');
+
+const plane = 'A320';
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[3]);
+console.log('B737'[0]);
+
+console.log(airline.length);
+console.log('B737'.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('Portugal'));
+
+console.log(airline.slice(4));
+console.log(airline.slice(4, 7));
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') console.log('You got the middle seat');
+  else console.log('You got lucky');
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+console.log(new String('caroline'));
+console.log(typeof new String('caroline'));
+
+console.log(typeof new String('caroline').slice(1));
+
+// MAPS
+
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct!'],
+  [false, 'Try again!'],
+]);
+
+console.log(question);
+
+// Convert objects to map
+console.log(Object.entries(openingHours));
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+// Quiz app
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+// const answer = Number(prompt('Your answer:'));
+const answer = 3;
+console.log(answer);
+
+// if (answer === 3) {
+//   console.log(question.get(true));
+// } else {
+//   console.log(question.get(false));
+// }
+
+console.log(question.get(question.get('correct') === answer));
+
+// Convert map to array
+console.log([...question]);
+console.log([...question.entries()]);
+console.log([...question.keys()]);
+console.log([...question.values()]);
+
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Firenze, Italy');
+console.log(rest.set(2, 'Lisbon, Portugal'));
+
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are closed');
+
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(1));
+
+const time = 8;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+console.log(rest.has('categories'));
+rest.delete(2);
+// rest.clear();
+const arr = [1, 2];
+rest.set(arr, 'Test');
+rest.set(document.querySelector('h1'), 'Heading');
+console.log(rest);
+console.log(rest.size);
+
+console.log(rest.get(arr));
+
+// SETS
+
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+
+console.log(ordersSet);
+
+console.log(new Set('Caroline'));
+
+console.log(ordersSet.size);
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+console.log(ordersSet);
+ordersSet.delete('Risotto');
+//ordersSet.clear();
+console.log(ordersSet);
+
+for (const order of ordersSet) console.log(order);
+
+// Example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+
+console.log(
+  new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+);
+
+console.log(new Set('carolinedesateixeira').size);
+
+
 const properties = Object.keys(openingHours);
 console.log(properties);
 
@@ -554,6 +839,189 @@ const entries2 = Object.entries(books[0].thirdParty.goodreads);
 console.log(entries);
 console.log(entries2);
 
+const books = [
+  {
+    title: 'Algorithms',
+    author: 'Robert Sedgewick',
+    ISBN: '9876543210',
+    keywords: ['Programming', 'Data', 'Data', 'IT'],
+    programmingLanguage: 'Java',
+    edition: 'first',
+    pages: 750,
+    thirdParty: {
+      goodreads: {
+        rating: 4.41,
+        ratingsCount: 1733,
+        reviewsCount: 63,
+        fiveStarRatingCount: 976,
+        oneStarRatingCount: 13,
+      },
+    },
+  },
+  {
+    title: 'The Mists of Avalon',
+    author: 'Marion Zimmer Bradley',
+    ISBN: '0123456789',
+    keywords: ['Legend', 'Religion', 'Mysticism', 'Mysticism'],
+    onlineContent: true,
+    highlighted: true,
+    pages: 1420,
+    thirdParty: {
+      goodreads: {
+        rating: 4.41,
+        ratingsCount: 1733,
+        reviewsCount: 63,
+        fiveStarRatingCount: 976,
+        oneStarRatingCount: 13,
+      },
+    },
+  },
+];
+
+const allKeywords = [];
+
+for (let i = 0; i < books.length; i++) {
+  allKeywords.push(...books[i].keywords);
+}
+
+// for (const book of books) {
+//   allKeywords.push(...book.keywords)
+// }
+
+console.log(allKeywords);
+
+const uniqueKeywords = new Set(allKeywords);
+console.log(uniqueKeywords);
+
+uniqueKeywords.add('Coding');
+uniqueKeywords.add('Science');
+console.log([uniqueKeywords]);
+
+uniqueKeywords.delete('Legend');
+console.log(uniqueKeywords);
+
+const uniqueKeywordsArr = [...uniqueKeywords];
+console.log(uniqueKeywordsArr);
+
+uniqueKeywords.clear();
+console.log(uniqueKeywords);
+
+const bookMap = new Map([
+  ['title', 'Clean Code'],
+  ['author', 'Robert C. Martin'],
+]);
+bookMap.set('pages', 464);
+console.log(bookMap);
+
+console.log(`"${bookMap.get('title')} by ${bookMap.get('author')}"`);
+console.log(bookMap.size);
+if (bookMap.has('author')) console.log('The author of the book is known');
+
+const firstBookMap = Object.entries(books[0]);
+console.log(firstBookMap);
+
+for(const [key, value] of firstBookMap) {
+if(typeof value === 'number') console.log(key);
+
+console.log(books[0].ISBN.indexOf(6));
+console.log(books[0].ISBN.indexOf(4));
+console.log(books[0].ISBN.indexOf(9));
+console.log(books[0].ISBN.indexOf(8));
+
+const quote =
+  'A computer once beat me at chess, but it was no match for me at kick boxing';
+console.log(quote.indexOf('chess'));
+
+console.log(quote.slice(quote.lastIndexOf(' ') + 1));
+
+function isContributor(author) {
+  return author.lastIndexOf('(Contributor)') !== -1;
+}
+
+console.log(isContributor('Julie Sussman (Contributor)'));
+console.log(isContributor('Robert Sedgewick'));
+
+const normalizeAuthorName = function (author) {
+  author = author.trim();
+  const firstName = author.slice(0, author.indexOf(' '));
+  const lastName = author.slice(
+    author.indexOf(' ') + 1,
+    author.lastIndexOf(' ') + 1
+  );
+  const capitalizedFirstName =
+    firstName[0].toUpperCase() + firstName.slice(1).toLowerCase();
+  const capitalizedLastName =
+    lastName[0].toUpperCase() + lastName.slice(1).toLowerCase();
+
+  return capitalizedFirstName + ' ' + capitalizedLastName;
+};
+
+console.log(normalizeAuthorName('  JuliE sussMan (Contributor)'));
+
+console.log(books[0].title.replace('Algorithms', 'Software'));
+
+function logBookTheme(title) {
+  title = title.toLowerCase();
+
+  if (title.startsWith('computer')) {
+    console.log('This book is about computers');
+  } else if (title.includes('algorithms') && title.includes('structures')) {
+    console.log('This book is about algorithms and data structures');
+  } else if (
+    (title.endsWith('system') || title.endsWith('systems')) &&
+    !title.includes('operating')
+  ) {
+    console.log(
+      'This book is about some systems, but definitely not about operating systems'
+    );
+  }
+}
+
+logBookTheme('Systems');
+
+const bookCategories =
+  'science;computing;computer science;algorithms;business;operating systems;networking;electronics';
+
+const logBookCategories = function (str) {
+  const categories = str.split(';');
+
+  for (let category of categories) {
+    console.log(category);
+  }
+};
+
+logBookCategories(bookCategories);
+
+function getKeywordsAsString(books) {
+  const keywords = [];
+
+  for (const book of books) {
+    keywords.push(...book.keywords);
+  }
+
+  const uniqueKeywords = [...new Set(keywords)];
+
+  return uniqueKeywords.join(';');
+}
+
+getKeywordsAsString(books);
+
+const bookChapters = [
+  ['The Basics', 14],
+  ['Sorting', 254],
+  ['Searching', 372],
+  ['Graphs', 526],
+  ['Strings', 706],
+];
+
+function logBookChapters(chapters) {
+  for (const [chapter, pages] of chapters) {
+    console.log(chapter.padEnd(20, '_') + ' ' + pages);
+  }
+}
+
+logBookChapters(bookChapters);
+
 // CHALLENGES
 // CHALLENGE 1
 
@@ -635,7 +1103,7 @@ const printGoals = function (...players) {
 printGoals(...game.scored);
 
 team1 < team2 && console.log('Team 1 is more likely to win');
-team1 > team2 && console.log('Team 2 is more likely to win');*/
+team1 > team2 && console.log('Team 2 is more likely to win');
 
 // CHALLENGE 2
 
@@ -680,31 +1148,126 @@ const game = {
   },
 };
 
-// let openStr = `We are open on ${properties2.length} days: `;
-
-// for (const day of properties2) {
-//   openStr += `${day}, `;
+// const entries = Object.entries(game.scored);
+// for (const [goals, scored] of entries) {
+//   console.log(`Goal ${goals}: ${scored}`);
 // }
 
-const entries = Object.entries(game.scored);
-for (const [goals, scored] of entries) {
-  console.log(`Goal ${goals}: ${scored}`);
-}
+for (const [i, player] of game.scored.entries())
+  console.log(`Goal ${i + 1}: ${player}`);
 
-let sum = 0;
-const values = Object.values(game.odds);
-for (const odds of values) {
-  sum += odds;
-}
+// let sum = 0;
+// const values = Object.values(game.odds);
+// for (const odds of values) {
+//   sum += odds;
+// }
+// const average = sum / values.length;
+// console.log(average);
 
-const average = sum / values.length;
+const odds = Object.values(game.odds);
+let average = 0;
+for (const odd of Object.values(game.odds)) average += odd;
+average /= odds.length;
 console.log(average);
 
-const { team1, x: draw, team2 } = game;
-console.log(team1, draw, team2);
+// const key = Object.keys(game);
+// for (const odds of values) {
+//   console.log(`Odd of victory: ${odds}`);
+// }
+// console.log(`Odd of victory ${game.team1}: ${game.odds.team1}`);
+// console.log(`Odd of draw: ${game.odds.x}`);
+// console.log(`Odd of victory ${game.team2}: ${game.odds.team2}`);
 
-const key = Object.keys(game);
-
-for (const odds of values) {
-  console.log(`Odd of victory: ${odds}`);
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
+  console.log(`Odd of ${teamStr}: ${odd}`);
 }
+
+const scorers = {};
+for (const player of game.scored) {
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+}
+
+console.log(scorers);
+
+// CHALLENGE 3
+
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+gameEvents.delete(64);
+console.log(gameEvents);
+
+const time = [...gameEvents.keys()].pop();
+console.log(
+  `An event happened, on average, every ${time / gameEvents.size} minutes`
+);
+
+for (const [min, event] of gameEvents) {
+  const half = min <= 45 ? 'FIRST' : 'SECOND';
+  console.log(`[${half} HALF] ${min}, ${event}`);
+}*/
+
+// CHALLENGE 4
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+*/
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+
+  for (const [i, row] of rows.entries()) {
+    const [first, second] = row.toLowerCase().trim().split('_');
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(`${output.padEnd(20)}${'✅'.repeat(i + 1)}`);
+  }
+});

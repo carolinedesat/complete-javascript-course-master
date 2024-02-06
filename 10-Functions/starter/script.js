@@ -126,7 +126,6 @@ greeterHey('Caroline');
 greeterHey('Conn');
 
 greetArr('Hello')('Caroline');
-*/
 
 const lufthansa = {
   airline: 'Lufthansa',
@@ -177,3 +176,64 @@ console.log(swiss);
 
 // Same as the apply methods above
 book.call(swiss, ...flightData);
+
+// Bind method
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+const bookLX = book.bind(swiss);
+
+bookEW(23, 'Antonio de Souza Teixeira');
+
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Caroline de Sa Teixeira');
+bookEW23('Conn Hannigan');
+
+// With Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this)
+
+  this.planes++;
+  console.log(this.planes)
+}
+// lufthansa.buyPlane();
+
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application (pre set parameters)
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+// addVAT = value => value + value * 0.23;
+
+console.log(addVAT(100));
+console.log(addVAT(23));
+
+// Challenge
+const addTax = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  }
+}
+
+const addVAT = addTax(0.23);
+console.log(addVAT(100));
+console.log(addVAT(23));
+*/
+
+//////////////////////////////////////////////////
+
+// Coding Challenge #1
+
+const poll = {
+  question: 'What is your favourite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+  // This generates [0, 0, 0, 0]. More in the next section 😃
+  answers: new Array(4).fill(0),
+  registerNewAnswer() {
+    const input = Number(prompt('What is your favourite programming language? \n 0: JavaScript \n 1: Python \n 2: Rust \n 3: C++ \n (Write option number)'));
+  },
+};
+
+poll.registerNewAnswer();

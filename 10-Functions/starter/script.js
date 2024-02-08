@@ -220,7 +220,6 @@ const addTax = function (rate) {
 const addVAT = addTax(0.23);
 console.log(addVAT(100));
 console.log(addVAT(23));
-*/
 
 //////////////////////////////////////////////////
 
@@ -232,8 +231,140 @@ const poll = {
   // This generates [0, 0, 0, 0]. More in the next section 😃
   answers: new Array(4).fill(0),
   registerNewAnswer() {
-    const input = Number(prompt('What is your favourite programming language? \n 0: JavaScript \n 1: Python \n 2: Rust \n 3: C++ \n (Write option number)'));
+    const input = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option number)`));
+
+    // if (input === 0) {
+    //   this.answers[0]++;
+    // } else if (input === 1) {
+    //   this.answers[1]++;
+    // } else if (input === 2) {
+    //   this.answers[2]++;
+    // } else if (input === 3) {
+    //   this.answers[3]++;
+    // } else {
+    //   console.log('This is not a valid number.')
+    // }
+
+    typeof input === 'number' && input < this.answers.length && this.answers[input]++;
+
+    this.displayResults();
+    this.displayResults('string');
+
   },
+
+  displayResults(type = 'array') {
+
+    if (type === 'array') {
+      console.log(this.answers)
+    } else if (type === 'string') {
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+    }
+  }
+
 };
 
-poll.registerNewAnswer();
+document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+
+const testData1 = [5, 2, 3];
+const testData2 = [1, 5, 3, 9, 6, 1];
+
+poll.displayResults.call({ answers: testData1 });
+poll.displayResults.call({ answers: testData2 }, 'string')
+
+const runOnce = function () {
+  console.log('This will never run again');
+}
+runOnce();
+
+// Immediatly invoked function expression
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23;
+})();
+
+(() => console.log('This will ALSO never run again'))();
+
+{
+  const isPrivate = 23;
+  var notPrivate = 46;
+}
+
+// console.log(isPrivate);
+console.log(notPrivate);
+
+// Closure - A function has access to the variable environment of the execution context in which it was created
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  }
+}
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+console.dir(booker);
+
+//Example 1
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  }
+}
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  }
+}
+
+g();
+f();
+console.dir(f);
+
+// Re-assigning f function
+h();
+f();
+console.dir(f);
+
+// Example 2
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000)
+
+  console.log(`Will start boarding in ${wait} seconds`);
+}
+
+// The closure has priority over the scope chain
+const perGroup = 1000;
+boardPassengers(180, 3);
+*/
+
+//////////////////////////////////////////////////
+
+// Coding Challenge #2
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  document.querySelector('body').addEventListener('click', function () {
+    header.style.color = 'blue';
+  })
+})();
+
